@@ -8,7 +8,7 @@
 2. How to use lists
 3. Naming them
 4. When to use lists and when not to
-5. Gotchas
+5. Common gotchas
 
 ## Why do we need lists
 
@@ -269,7 +269,7 @@ populations = {
 }
 ```
 
-# Gotchas
+# Common Gotchas
 
 Lists are objects. When you pass it to another function, you are passing a reference to the same list object. 
 
@@ -290,7 +290,7 @@ print my_list
 #Is this what you expected/intended?
 ```
 
-The same rationale applies to 
+The same rationale applies to:
 ```python    
 a = [1, 2, 3]
 b = a
@@ -304,3 +304,15 @@ print b
 ```
 
 In fact this is how Python works for all variables, including strings and numbers. It just doesn't feel that way because those are immutable types, so you think you are copying the value around.
+
+Another common mistake is modifying the list as you iterate over it:
+
+```python
+numbers = [1, 2, 3, 6, 10, 20]
+for i in numbers: 
+    if i < 10:
+        # This will go horribly wrong!
+        del numbers[i] 
+```
+
+Do not manipulate the list you are iterating over! Create a copy instead, or think of another way.
