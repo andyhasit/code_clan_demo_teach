@@ -1,25 +1,18 @@
-# Arrays
+# Lists
 
 (I'll give this talk in Python, where arrays are called lists)
 
-### objectives
+## Topics:
 
-1. Describe why arrays exist
-2. Demonstrate creating an array
-3. Demonstrate accessing an element from an array
-4. Demonstrate calling array methods
+1. What lists are and why we need them
+2. How to use lists
+3. Naming them
+4. When to use lists and when not to
+5. Gotchas
 
-## Why do we have lists
+## Why do we need lists
 
-We looked at saving things to variables:
-
-```python
-a = 27
-b = 89
-...
-```
-
-And how these can be used for:
+We looked at saving things to variables and how these can be used for:
 
 1. Storing values
 2. Passing those values to other places, like functions
@@ -30,10 +23,10 @@ For example:
 a = 27
 b = 89
 
-add_two_numbers(a, b)
+print_highest_number(a, b)
 ```
 
-But what if we have n number of values?
+But what if we have **n** number of values?
 
 ```python
 a = 27
@@ -41,13 +34,12 @@ b = 89
 c = 46
 ...panic
 
-add_loads_of_numbers(a, b, c.....help!)
+print_highest_number(a, b, c.....help!)
 ```
-
 
 Creating a variable for each value is not sustainable.
 
-# Lists to the rescue
+## Lists to the rescue
 
 Lists allow us to store multiple values a one variable:
 
@@ -59,35 +51,35 @@ Which can then be passed around like any other variable:
 
 ```python    
 my_values = [27, 89, 46] 
-add_loads_of_numbers(my_values)
+print_highest_number(my_values)
 
-// where add_loads_of_numbers looks something like this:
+# where add_loads_of_numbers looks something like this:
 
-def add_loads_of_numbers(a_list_of_numbers):
-    //do stuff..
+def print_highest_number(a_list_of_numbers):
+    # do stuff..
     ... 
 ```
 
-# What can you do with lists?
+## What can you do with lists?
 
 1. Access items
 2. Add/Remove/Replace items
 3. Iterate (and therefore search, filter or extract sub lists)
 
-# Accessing
+## Accessing
 
 You access an element inside a list by specifying it's postion:
 
 ```python
 my_values = [27, 89, 46]
 
-// this will print the element at position 0 (i.e. 27)
+# this will print the element at position 0 (i.e. 27)
 print my_values[0] 
 
-// this will print the element at position 2 (i.e. 46)
+# this will print the element at position 2 (i.e. 46)
 print my_values[2]
 
-// this will throw an error
+# this will throw an error
 print my_values[5]
 ```
 
@@ -111,7 +103,7 @@ words[1].upper()
 ```
 
 
-# Visualising it:
+#### Visualising it:
 
 As we saw before, variables are like boxes, each has a label (a, b, x, y...), and contains a value (5, 24, "potato" ...) which you can use, or overwrite.
 
@@ -141,7 +133,7 @@ print my_values
 >>> [27, 42, 46] 
 ```
 
-# Adding items
+## Adding items
 
 There are three principal methods for adding.
 
@@ -164,7 +156,7 @@ words.insert(1, 'rocks')
 
 This pushes the other elements up.
 
-# Removing
+## Removing items
 
 ```python
 words = ['code', 'clan']
@@ -173,13 +165,22 @@ del words[0]
 >>> ['code']
 ```
 
-# Iterating
+## Iterating
 
-The **for** expression loops over the list, executing the nested chunk of code on each element.
+One of the main reasons for having lists is so you can do something with/to each element in it.
 
-which will be available as the temporary variable
+You do this using the **for i in list** expression, which simply executes the nested chunk of code on each element.
+
+The elements will be accessible as the variable **i** (or whatever you call it) inside the nested block:
 
 ```python
+for i in [1, 2, 3]:
+    print i * 3
+    
+>>> 2
+>>> 4
+>>> 6
+
 words = ['code', 'clan']
 for x in words:
     print x.upper()
@@ -188,8 +189,7 @@ for x in words:
 >>> 'CLAN'
 ```
 
-
-# Naming
+## Naming
 
 Giving variables good descriptive names is your first line of defence against bugs (remember, bugs come from your own oversights, so you need to do what you can to minimize the chance of you having any).
 
@@ -206,10 +206,101 @@ But these are rather generic and ambiguous, which will cause problems if you end
 2. files_to_process
 3. files_with_errors
 
-On no account should you ever use the single letter **l** for a list (or any other variable). In many fonts  **l** is indistinguishable from a **1** an **|** or an **I**.
+Equally, it helps if the iterator variable has a sensible name:
 
-# Limitations
+```python
+words = ['code', 'clan']
+for word in words:
+    print word.upper()
+
+>>> 'CODE'
+>>> 'CLAN'
+```
+
+On no account should you ever use a single lower case **L** to name a list (or any other) variable. In many fonts  **l** is indistinguishable from **1**, **|** or **I**.
+
+# When to use lists
+
+Ask yourself:
+  
+  - Do I have more than one thing I want to treat the same way?
+  - Will the number of those things ever possibly grow beyond two?
+
+If the answer is yes to those, then you should use a list or other collection instead of individual variables.
+
+Key signs that you should be using a list are duplication in your code:
+
+```python
+data_from_glasgow_survey = get_data_from_file('glasgow_data.txt')
+data_from_edinburgh_survey = get_data_from_file('edinburgh_data.txt')
+
+process_data(data_from_glasgow_survey)
+process_data(data_from_edinburgh_survey)
+```
+
+And the presence of numbers in variables (or first, 2nd etc...)
+
+
+```python
+data_set_1 = get_data_one_way('data_set_1.txt')
+data_set_2 = get_data_another_way('data_set_2.txt')
+
+process_one_way(data_set_1)
+process_another_way(data_set_2)
+```
+
+Here the duplication is less obvious and you might not yet know how to get round it (topic for another lesson) but the problem remains: what if there is a third data set?
+
+
+# When not to use lists
 
 Lists store their elements by sequential index (starting at 0) and that is the only way you can directly retrieve elements.
- 
-Make sure you understand this.
+
+If you want to remember values by a certain key, then you would use a dictionary:
+
+```python
+glasgow = 598830
+edinburgh = 495360
+
+#replace with
+populations = {
+    'glasgow' : 598830
+    'edinburgh': 495360
+}
+```
+
+# Gotchas
+
+Lists are objects. When you pass it to another function, you are passing a reference to the same list object. 
+
+The function creates its own variable for the the list, but the list is the same object, and any changes made to it will impact other places you use the list:
+
+
+```python
+do_things_with_list(a_list):
+    a_list.append(4)
+
+my_list = [1, 2, 3]
+do_things_with_list(my_list)
+
+print my_list
+>>> [1, 2, 3, 4]
+
+   
+#Is this what you expected/intended?
+```
+
+The same rationale applies to 
+```python    
+a = [1, 2, 3]
+b = a
+b.append(4)
+
+print a
+>>> [1, 2, 3, 4]
+
+print b
+>>> [1, 2, 3, 4]
+```
+
+In fact this is how Python works for all variables, including strings and numbers. It just doesn't feel that way because those are immutable types, so you think you are copying the value around.
