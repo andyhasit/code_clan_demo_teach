@@ -46,18 +46,19 @@ Lists allow us to store multiple values a one variable:
 ```python
 my_values = [27, 89, 46]
 ```
+#### Visualising it:
 
-Which can then be passed around like any other variable:
+As we saw before, variables are like boxes, each has a label (a, b, x, y...), and contains a value (5, 24, "potato" ...) which you can use, or overwrite.
+
+A list is also a box, with a label, but when you look inside you are presented with a row of smaller boxes, all numbered, starting at 0 and going as far as there are elements in the list.
+
+That list can then be passed around like any other variable:
 
 ```python    
 my_values = [27, 89, 46] 
 print_highest_number(my_values)
 
-# where add_loads_of_numbers looks something like this:
-
-def print_highest_number(a_list_of_numbers):
-    # do stuff..
-    ... 
+# Assuming print_highest_number now takes a single parameter 
 ```
 
 ## What can you do with lists?
@@ -105,11 +106,11 @@ words[1].upper()
 
 #### Visualising it:
 
-As we saw before, variables are like boxes, each has a label (a, b, x, y...), and contains a value (5, 24, "potato" ...) which you can use, or overwrite.
+Back to the box analogy.
 
-A list is also a box, with a label, but when you look inside you are presented with a row of smaller boxes, all numbered, starting at 0 and going as far as there are elements in the list.
+These smaller boxes inside the list also contain values, but they don't have their own variables/labels, only their index/sequence within the list. 
 
-These smaller boxes also contain values, but they don't have their own labels. To reach the values inside them, you need to give the name of the outer box (i.e. the list) and the number of the inner box (which we call its index):
+To reach the values inside them, you need to give the name of the outer box (i.e. the list) and the number of the inner box (which we call its index):
 
 ```python
 my_values[1]
